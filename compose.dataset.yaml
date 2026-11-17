@@ -1,0 +1,15 @@
+# Build Tech Relay fork from source and persist its private data locally.
+services:
+  uptime-kuma:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+      target: release
+    image: techrelay/uptime-kuma:local
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - UPTIME_KUMA_PORT=3001
